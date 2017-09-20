@@ -9,35 +9,42 @@
 import UIKit
 import Parse
 
-class AccountListViewController: UITableViewController {
+class AccountListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
     var accounts = [AccountM]()
     var atRow = Int()
     
+    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("account list loaded")
         
         let acccountQry = PFQuery(className: "account")
         //get the accounts for current user
         acccountQry.whereKey("accountHolder", equalTo: (PFUser.current()?.objectId!)!)
         //acccountQry.selectKeys(["objectId"])
         acccountQry.findObjectsInBackground(block: { (objects, error) in
-            
-            if let accounts = objects {
-                for object in accounts{
-                    if let account = object as? PFObject{
-                      
-                        let accountId = account.objectId!
-                        let name = account["accountName"] as! String
-                        let num =  String(account["accountNumber"] as! NSInteger)
-                        let type = account["type"] as! String
-                        let bal = account["bal"] as! Float
-                        let a = AccountM(id:accountId, name: name, number: num, type: type, bal: bal)
-                        
-                        self.accounts.append(a)
-                        self.tableView.reloadData()
+            DispatchQueue.global(qos: .background).async { //keep fetching in the background, different thread
+                if let accounts = objects {
+                    for object in accounts{
+                        if let account = object as? PFObject{
+                            
+                            let accountId = account.objectId!
+                            let name = account["accountName"] as! String
+                            let num =  String(account["accountNumber"] as! NSInteger)
+                            let type = account["type"] as! String
+                            let bal = account["bal"] as! Float
+                            let a = AccountM(id:accountId, name: name, number: num, type: type, bal: bal)
+                            
+                            self.accounts.append(a)
+                            print("done with qry")
+                            DispatchQueue.main.async {
+                                print("realoading data")
+                                self.tableView.reloadData()
+                            }
+                        }
                     }
+                    //print(accounts)
                 }
-                //print(accounts)
             }
         })
 
@@ -55,18 +62,20 @@ class AccountListViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+       
         return accounts.count
+       
     }
 
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! AccountDetailsTableViewCell
         
         cell.accountName.text = accounts[indexPath.row].name
@@ -78,7 +87,7 @@ class AccountListViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         atRow = indexPath.row
         performSegue(withIdentifier: "toTransaction", sender: self)
         

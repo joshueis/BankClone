@@ -13,22 +13,29 @@ class DepositViewController: UIViewController, UINavigationControllerDelegate, U
     
     
     @IBOutlet weak var frontC: UIButton!
+    @IBOutlet weak var backC: UIButton!
+    
+    
     var frontCheck = UIImage()
     var imagePicker = UIImagePickerController()
     
     @IBOutlet weak var accountPicker: UIPickerView!
     
-    @IBAction func getFrontCheck(_ sender: Any) {
-        
+    @IBAction func unwindToRootViewController(segue: UIStoryboardSegue) {
+        print("Unwind to Root View Controller")
+    }
+    
+    
+    @IBAction func getCheck(sender: UIButton) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.camera
         imagePicker.allowsEditing = false
-        
         self.present(imagePicker, animated: true, completion: nil)
         
     }
     //MARK: - Done image capture here
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         frontCheck = info[UIImagePickerControllerOriginalImage] as! UIImage
         imagePicker.dismiss(animated: true, completion: nil)
