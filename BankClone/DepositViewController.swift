@@ -45,7 +45,7 @@ class DepositViewController: UIViewController, UINavigationControllerDelegate, U
     
     @IBAction func deposit(_ sender: Any) {
         
-        let post = PFObject(className: "mobileDeposit")
+        let post = PFObject(className: "MobileDeposit")
         // do a quick check for max amount allowed and then continue
         
         if let amount = amountTF.text, let imageData = UIImagePNGRepresentation(frontCheck),

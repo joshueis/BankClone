@@ -27,6 +27,7 @@
 		F9B5C39F1F3EF75100D9EB35 /* backIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = F9B5C39E1F3EF75100D9EB35 /* backIcon.png */; };
 		F9B5C3A11F3EF95F00D9EB35 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B5C3A01F3EF95F00D9EB35 /* TransactionViewController.swift */; };
 		F9C1405B1F69099D00B83C68 /* DepositViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C1405A1F69099D00B83C68 /* DepositViewController.swift */; };
+		F9C6780E1F72E374003300AC /* DesignableUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6780D1F72E374003300AC /* DesignableUIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		F9B5C39E1F3EF75100D9EB35 /* backIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = backIcon.png; path = ../../backIcon.png; sourceTree = "<group>"; };
 		F9B5C3A01F3EF95F00D9EB35 /* TransactionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransactionViewController.swift; path = BankClone/TransactionViewController.swift; sourceTree = SOURCE_ROOT; };
 		F9C1405A1F69099D00B83C68 /* DepositViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DepositViewController.swift; path = BankClone/DepositViewController.swift; sourceTree = "<group>"; };
+		F9C6780D1F72E374003300AC /* DesignableUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DesignableUIView.swift; path = BankClone/DesignableUIView.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				F905E7921F3D8BDC0001D305 /* Main.storyboard */,
 				F95C3F3E1F3FB88D008D7EBF /* TransactionViewCell.swift */,
 				F905E7951F3D99010001D305 /* AccountDetailsTableViewCell.swift */,
+				F9C6780D1F72E374003300AC /* DesignableUIView.swift */,
 			);
 			name = BankClone;
 			path = ParseStarterProject;
@@ -141,8 +144,8 @@
 		F95C3F441F42C540008D7EBF /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				F9C1405A1F69099D00B83C68 /* DepositViewController.swift */,
 				F905E78D1F3D8BBD0001D305 /* ViewController.swift */,
+				F9C1405A1F69099D00B83C68 /* DepositViewController.swift */,
 				F905E78B1F3D8BBD0001D305 /* AccountListViewController.swift */,
 				F9B5C3A01F3EF95F00D9EB35 /* TransactionViewController.swift */,
 			);
@@ -233,6 +236,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9C6780E1F72E374003300AC /* DesignableUIView.swift in Sources */,
 				F9C1405B1F69099D00B83C68 /* DepositViewController.swift in Sources */,
 				F905E7911F3D8BBD0001D305 /* ViewController.swift in Sources */,
 				F9B5C3991F3ED53700D9EB35 /* AccountM.swift in Sources */,

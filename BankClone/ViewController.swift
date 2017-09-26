@@ -12,6 +12,9 @@ import Parse
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var tittleView: UIView!
+    
+    
     @IBOutlet weak var userTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
     @IBOutlet weak var saveUser: UISwitch!
@@ -20,6 +23,11 @@ class ViewController: UIViewController {
     var signupMode = true
     var user = String()
     var pass = String()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
     
     //var signedIn = nil
     @IBAction func logIn(_ sender: Any) {
@@ -32,9 +40,11 @@ class ViewController: UIViewController {
             
         } else {
             
+            
             user = userTF.text!
             pass = passwordTF.text!
             
+            //stop the app activity till we are logged in
             self.activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
             self.activityIndicator.center = self.view.center
             self.activityIndicator.hidesWhenStopped = true
@@ -42,9 +52,6 @@ class ViewController: UIViewController {
             self.view.addSubview(self.activityIndicator)
             self.activityIndicator.startAnimating()
             UIApplication.shared.beginIgnoringInteractionEvents() // UIApplication.shared() is now UIApplication.shared
-            
-            
-           // DispatchQueue.global(qos: .userInitiated).async {
             
             logQueue.async {
                 //make sure we don't move to next view unless we signed in
@@ -78,74 +85,7 @@ class ViewController: UIViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        /*let testObject = PFObject(className: "TestObject")
-        testObject["test"] = "one"
-        testObject.saveInBackground { (success, error) in
-            print("object saved correctly")
-        }*/
-        
-        
-        // Do any additional setup after loading the view, typically from a nib.
-       /*
-       let user = PFObject(className: "Users")
-        
-        user["name"] = "Rob"
-        
-        user.saveInBackground { (success, error) in
-            
-            if success {
-                
-                print ("Object saved")
-                
-            } else {
-                
-                if let error = error {
-                    
-                    print (error)
-                    
-                } else {
-                    
-                    print ("Error")
-                    
-                }
-            }
-        } */
-        
-        /*let query = PFQuery(className: "Users")
-        query.getObjectInBackground(withId: "FlmMnJgfI1") { (object, error) in
-            if error != nil {
-                
-                print (error)
-                
-            } else {
-                
-                if let user = object {
-                    
-                    user["name"] = "Kirsten"
-                    
-                    user.saveInBackground(block: { (success, error) in
-                        if success {
-                            
-                            print ("Saved")
-                        
-                        } else {
-                            
-                            print (error)
-                            
-                        }
-                    })
-                    
-                
-                }
-            }
-        }
-       */
-        
-        
-    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
